@@ -37,6 +37,7 @@ html, body {
     background-attachment: fixed;
     padding: 40px;
     text-align: center;
+    position: relative;
 }
 
 /* Heading and Role Selection */
@@ -45,6 +46,7 @@ h2 {
     font-weight: bold;
     color: #2c3e50;
     margin-bottom: 30px;
+    text-shadow: 0 2px 4px rgba(255,255,255,0.8);
 }
 
 .role-selection {
@@ -81,18 +83,61 @@ h2 {
     top: 0;
     width: 100%;
     height: 100%;
-    background-color: rgba(0, 0, 0, 0.6);
+    background-color: rgba(0, 0, 0, 0.7);
+    backdrop-filter: blur(4px);
 }
 
 .modal-content {
     background-color: #fff;
     margin: 10% auto;
-    padding: 25px;
+    padding: 30px;
     border-radius: 12px;
     width: 90%;
-    max-width: 500px;
+    max-width: 450px;
     position: relative;
-    box-shadow: 0 5px 15px rgba(0,0,0,0.3);
+    box-shadow: 0 10px 25px rgba(0,0,0,0.4);
+    animation: slideDown 0.3s ease-out;
+}
+
+@keyframes slideDown {
+    from { opacity: 0; transform: translateY(-50px); }
+    to { opacity: 1; transform: translateY(0); }
+}
+
+/* Form Elements inside Modal */
+#modal-body h3 {
+    margin-bottom: 20px;
+    color: #2c3e50;
+    text-align: center;
+}
+
+#modal-body form {
+    display: flex;
+    flex-direction: column;
+    gap: 15px;
+}
+
+#modal-body input {
+    width: 100%;
+    padding: 12px;
+    border: 1px solid #ccc;
+    border-radius: 6px;
+    font-size: 1rem;
+}
+
+#modal-body button[type="submit"] {
+    background-color: #28a745;
+    color: white;
+    padding: 12px;
+    border: none;
+    border-radius: 6px;
+    font-size: 1.1rem;
+    cursor: pointer;
+    margin-top: 10px;
+}
+
+#modal-body button[type="submit"]:hover {
+    background-color: #218838;
 }
 
 .close {
@@ -106,7 +151,7 @@ h2 {
 }
 
 .close:hover {
-    color: #000;
+    color: #333;
 }
 
 /* Header and Footer Components */
@@ -127,22 +172,6 @@ h2 {
     justify-content: space-between;
     align-items: center;
     flex-wrap: wrap;
-}
-
-/* Input and Interactive Elements */
-.input-field, .select-dropdown {
-    width: 100%;
-    padding: 12px;
-    margin: 10px 0;
-    border: 1px solid #ccc;
-    border-radius: 4px;
-    font-size: 1rem;
-}
-
-.input-field:focus {
-    outline: none;
-    border-color: #007bff;
-    box-shadow: 0 0 5px rgba(0,123,255,0.2);
 }
 
 /* Responsive adjustments */

@@ -1,4 +1,4 @@
-package com.project.back_end.models;
+package com.project.back_end.models; // Changed to match your repository imports
 
 import jakarta.persistence.*;
 import jakarta.validation.constraints.*;
@@ -33,7 +33,9 @@ public class Doctor {
     @Pattern(regexp = "^[0-9]{10}$", message = "Phone number must be exactly 10 digits")
     private String phone;
 
-    @ElementCollection
+// Inside Doctor.java
+
+    @ElementCollection(fetch = FetchType.EAGER) // Change this line
     private List<String> availableTimes;
 
     public Doctor() {
@@ -48,6 +50,16 @@ public class Doctor {
         this.phone = phone;
         this.availableTimes = availableTimes;
     }
+
+    // --- ALIAS FOR SERVICE COMPATIBILITY ---
+    public List<String> getAvailability() {
+        return availableTimes;
+    }
+
+    public void setAvailability(List<String> availability) {
+        this.availableTimes = availability;
+    }
+    // ---------------------------------------
 
     public Long getId() {
         return id;

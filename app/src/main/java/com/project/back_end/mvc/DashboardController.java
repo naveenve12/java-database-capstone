@@ -1,7 +1,9 @@
 package com.project.back_end.mvc;
 
-import com.project.back_end.service.CommonService;
+import com.project.back_end.services.CommonService;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.HttpStatus;
+import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
@@ -16,9 +18,9 @@ public class DashboardController {
 
     @GetMapping("/adminDashboard/{token}")
     public String adminDashboard(@PathVariable String token) {
-        Map<String, String> errors = commonService.validateToken(token, "admin");
+        ResponseEntity<Map<String, String>> response = commonService.validateToken(token, "admin");
         
-        if (errors.isEmpty()) {
+        if (response.getStatusCode() == HttpStatus.OK) {
             return "admin/adminDashboard";
         } else {
             return "redirect:/";
@@ -27,9 +29,9 @@ public class DashboardController {
 
     @GetMapping("/doctorDashboard/{token}")
     public String doctorDashboard(@PathVariable String token) {
-        Map<String, String> errors = commonService.validateToken(token, "doctor");
+        ResponseEntity<Map<String, String>> response = commonService.validateToken(token, "doctor");
         
-        if (errors.isEmpty()) {
+        if (response.getStatusCode() == HttpStatus.OK) {
             return "doctor/doctorDashboard";
         } else {
             return "redirect:/";
